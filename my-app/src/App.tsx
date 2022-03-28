@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import AddToList from './components/AddToList/AddToList';
+import List from "./components/List/List"
+
+export interface ICharacters {
+  characters: {
+    name: string,
+    age: number,
+    url: string,
+    note?: string,
+  }[]
+}
 
 function App() {
+
+  const [characters, setCharacters] = useState<ICharacters["characters"]>([
+    {
+      name: "Uzumaki Naruto",
+      age: 20,
+      url: "https://i.pinimg.com/736x/79/5b/53/795b5303feaf37283b0f07229a009150.jpg",
+      note: "Loves ramen"
+    }
+  ])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Anime characters.</h1>
+      <List characters={characters} />
+      <AddToList characters={characters} setCharacters={setCharacters} />
     </div>
+
   );
 }
 
